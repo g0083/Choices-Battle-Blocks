@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Choices Battle Tetris - Block Selection Battle</title>
+    <title>Choices Battle Blocks - Block Selection Battle</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
@@ -14,8 +14,8 @@
     <link rel="icon" type="image/png" href="/icon-192.png">
     <meta name="google" content="notranslate">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-  <script type="module" crossorigin src="/assets/index-64jLPL1I.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-DI7rpDKP.css">
+  <script type="module" crossorigin src="/assets/index-C0FoGjj3.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-ZxU5ePEY.css">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
             <h1>
                 <a href="#" id="title-home-link"
                     style="text-decoration: none; color: inherit; display: flex; align-items: center;">
-                    <img src="/assets/title_threshold_eroded-B6iEnT_D.png" alt="Choices Battle Tetris" class="title-logo">
+                    <img src="/assets/title2-kCkqiuBM.png" alt="Choices Battle Blocks" class="title-logo">
                 </a>
             </h1>
             <div style="display: flex; align-items: center; gap: 10px;">
@@ -83,7 +83,9 @@
         <main>
             <div id="start-screen" class="overlay box-glow">
                 <div class="lobby-content">
-                    <h2>Choices Battle Tetris</h2>
+                    <div class="main-title-container">
+                        <img src="/assets/title2-kCkqiuBM.png" alt="Choices Battle Blocks" class="main-title-img">
+                    </div>
                     <div class="input-group">
                         <label data-i18n="player_name_label">Your Name</label>
                         <input type="text" id="player-name" placeholder="Enter your name"
@@ -101,7 +103,7 @@
                             <button id="menu-replay-btn" class="btn-secondary"
                                 style="padding: 20px; font-size: 1.2rem; letter-spacing: 2px;"
                                 data-i18n="menu_replay_mode">▶ REPLAY MODE</button>
-                            <input type="file" id="replay-file" accept=".choices-battle-tetris-replay,.json"
+                            <input type="file" id="replay-file" accept=".choices-battle-blocks-replay,.json"
                                 class="hidden">
                         </div>
 
@@ -462,7 +464,7 @@
 
                     <h3 style="color: white; margin-bottom: 10px;">🌟 ゲームの特徴</h3>
                     <p style="margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8);">
-                        「Choices Battle Tetris」は、自分と相手のブロックを互いに選び合う、新感覚の対戦型パズルゲームです。<br>
+                        「Choices Battle Blocks」は、自分と相手のブロックを互いに選び合う、新感覚の対戦型パズルゲームです。<br>
                         落ちてくるブロックを処理する技術だけでなく、<strong>「相手にどの厄介なブロックを送るか」</strong>という駆け引きが勝利の鍵を握ります！
                     </p>
 
@@ -533,6 +535,9 @@
                         PeerJS (MIT), QRious (GPL-3.0), ONNX Runtime (MIT), nanoid (MIT), Outfit Font (OFL)
                     </p>
 
+                    <div style="margin-top: 30px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px; font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.4;">
+                        <p><strong>Disclaimer:</strong> This game is an independent fan-made work. It is not affiliated with, authorized, or endorsed by The Tetris Company. All trademarks and registered trademarks are the property of their respective owners.</p>
+                    </div>
                     <button id="close-help-btn" class="btn-primary" style="width: 100%;"
                         data-i18n="close">Close</button>
                 </div>
