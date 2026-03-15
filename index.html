@@ -14,8 +14,8 @@
     <link rel="icon" type="image/png" href="/icon-192.png">
     <meta name="google" content="notranslate">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-  <script type="module" crossorigin src="/assets/index-C0FoGjj3.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-ZxU5ePEY.css">
+  <script type="module" crossorigin src="/assets/index-DrrbgAxi.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Tf0gEFzy.css">
 </head>
 
 <body>
@@ -58,7 +58,7 @@
                                 <span id="spectator-number">👁 0</span>
                             </div>
                             <button id="fullscreen-toggle-btn" class="menu-item">
-                                <span>⛶</span> <span>全画面表示</span>
+                                <span>⛶</span> <span id="fullscreen-text" data-i18n="fullscreen_enter">全画面表示</span>
                             </button>
                             <button id="settings-btn-menu" class="menu-item">
                                 <span>⚙️</span> <span data-i18n="settings">Settings</span>
@@ -174,20 +174,20 @@
                                 Level</h3>
                             <p
                                 style="font-size:0.85rem; opacity:0.9; margin-bottom:20px; text-align: center; line-height: 1.5;">
-                                <span data-i18n="cpu_level_description">Lv10はヒューリスティックとしてほぼ無敵の強さです。</span><br>
+                                <span data-i18n="cpu_level_description">Lv10まではヒューリスティックによる基本ロジックです。</span><br>
                                 <span style="color: var(--accent-secondary); font-weight: bold;"
-                                    data-i18n="cpu_ai_notice">Lv11〜20（AIモデル）は現在開発中のため、近日公開予定です！</span>
+                                    data-i18n="cpu_ai_notice">Lv11〜20は「差し込み」や「高度な評価関数」を搭載した強化AIです！</span>
                             </p>
                             <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px;"
                                 id="level-buttons-container"></div>
                         </div>
 
                         <div id="dual-cpu-section" class="hidden">
-                            <p
+                             <p
                                 style="font-size:0.85rem; opacity:0.9; margin-bottom:20px; text-align: center; line-height: 1.5;">
-                                <span data-i18n="cpu_level_description">Lv10はヒューリスティックとしてほぼ無敵の強さです。</span><br>
+                                <span data-i18n="cpu_level_description">Lv10まではヒューリスティックによる基本ロジックです。</span><br>
                                 <span style="color: var(--accent-secondary); font-weight: bold;"
-                                    data-i18n="cpu_ai_notice">Lv11〜20（AIモデル）は現在開発中のため、近日公開予定です！</span>
+                                    data-i18n="cpu_ai_notice">Lv11〜20は「差し込み」や「高度な評価関数」を搭載した強化AIです！</span>
                             </p>
 
                             <div class="input-group"
@@ -226,17 +226,12 @@
                     <h2 id="lobby-title" data-i18n="lobby_title">Lobby</h2>
                     <div id="room-info" class="glass hidden">
                         <span class="label" data-i18n="invite_link_qr">Invite Link & QR</span>
-                        <div class="share-box"
-                            style="display: flex; flex-direction: column; gap: 15px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-top: 10px;">
-                            <div style="display: flex; width: 100%; align-items: center; gap: 10px;">
-                                <span id="my-peer-id"
-                                    style="font-weight: 800; color: var(--accent-secondary); flex: 1; min-width: 0; word-break: break-all;">...</span>
-                                <button id="copy-link" class="btn-secondary"
-                                    style="white-space: nowrap; width: auto; padding: 10px 15px; flex-shrink: 0;"
-                                    data-i18n="copy_link">Copy
-                                    link</button>
+                        <div class="share-box">
+                            <div class="share-box-top">
+                                <span id="my-peer-id">...</span>
+                                <button id="copy-link" class="btn-secondary" data-i18n="copy_link">Copy link</button>
                             </div>
-                            <div style="background: white; padding: 10px; border-radius: 8px; align-self: flex-start;">
+                            <div class="qr-container">
                                 <canvas id="invite-qr"></canvas>
                             </div>
                         </div>
@@ -532,7 +527,7 @@
                     <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_license_title">📜 サードパーティ・ライセンス</h3>
                     <p style="margin-bottom: 30px; font-size: 0.8rem; line-height: 1.6; color: rgba(255,255,255,0.6);"
                         data-i18n="help_license_libraries">
-                        PeerJS (MIT), QRious (GPL-3.0), ONNX Runtime (MIT), nanoid (MIT), Outfit Font (OFL)
+                        PeerJS (MIT), QRious (GPL-3.0), nanoid (MIT), Outfit Font (OFL)
                     </p>
 
                     <div style="margin-top: 30px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px; font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.4;">
