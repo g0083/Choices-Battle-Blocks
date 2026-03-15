@@ -14,8 +14,8 @@
     <link rel="icon" type="image/png" href="/icon-192.png">
     <meta name="google" content="notranslate">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-  <script type="module" crossorigin src="/assets/index-Co24P2U_.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-CblLfJD_.css">
+  <script type="module" crossorigin src="/assets/index-Dna56Yeh.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DswXueUE.css">
 </head>
 
 <body>
@@ -380,6 +380,20 @@
                 </div>
             </div>
 
+            <div id="replay-controls" class="hidden">
+                <button id="replay-prev-phase" class="btn-secondary">⏮</button>
+                <button id="replay-play-pause" class="btn-secondary">⏸</button>
+                <input type="range" id="replay-seek-bar" min="0" max="100" value="0">
+                <button id="replay-next-phase" class="btn-secondary">⏭</button>
+                <select id="replay-speed-select">
+                    <option value="0.5">0.5x</option>
+                    <option value="1.0" selected>1.0x</option>
+                    <option value="2.0">2.0x</option>
+                    <option value="5.0">5.0x</option>
+                </select>
+                <button id="replay-exit-btn">EXIT</button>
+            </div>
+
             <div id="game-over-overlay" class="overlay hidden glass-heavy">
                 <div class="lobby-content result-screen">
                     <h2 id="result-text" data-i18n="result">RESULT</h2>
@@ -431,7 +445,7 @@
                     <div class="final-actions">
                         <p id="restart-status"></p>
                         <button id="download-replay-btn" class="btn-secondary" style="margin-bottom: 10px; width: 100%;"
-                            data-i18n="download_replay">💾 DOWNLOAD REPLAY</button>
+                            data-i18n="save_replay">💾 SAVE REPLAY</button>
                         <button id="watch-replay-btn" class="btn-primary" style="margin-bottom: 10px; width: 100%;"
                             data-i18n="watch_replay">▶
                             WATCH REPLAY</button>
@@ -545,6 +559,19 @@
                         data-i18n="close">Close</button>
                 </div>
             </div>
+            <div id="replay-list-overlay" class="overlay hidden glass-heavy" style="z-index: 2500;">
+                <div class="lobby-content" style="max-width: 600px; padding: 30px; max-height: 80vh; display: flex; flex-direction: column;">
+                    <h2 style="color: var(--accent-primary); margin-bottom: 20px; text-align: center;" data-i18n="replay_list_title">Saved Replays</h2>
+                    
+                    <div id="replay-list-container" style="flex: 1; overflow-y: auto; margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;">
+                        </div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: auto;">
+                        <button id="load-device-replay-btn" class="btn-accent" data-i18n="load_from_device">📁 Load from Device</button>
+                        <button id="close-replay-list-btn" class="btn-secondary" data-i18n="close">Close</button>
+                    </div>
+                </div>
+            </div>
         </main>
 
         <div id="alert-overlay" class="overlay hidden glass-heavy" style="z-index: 2000;">
@@ -556,7 +583,7 @@
             </div>
         </div>
 
-        <div id="confirm-overlay" class="overlay hidden glass-heavy" style="z-index: 2005;">
+        <div id="confirm-overlay" class="overlay hidden glass-heavy" style="z-index: 3000;">
             <div class="lobby-content" style="max-width: 400px; padding: 30px;">
                 <h3 id="confirm-title" style="color: var(--accent-primary); margin-bottom: 15px;"
                     data-i18n="alert_confirmation">Confirmation</h3>
@@ -566,6 +593,20 @@
                         data-i18n="back_btn">Cancel</button>
                     <button id="confirm-ok-btn" class="btn-primary" style="flex: 1;"
                         data-i18n="connect_btn">Switch</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="prompt-overlay" class="overlay hidden glass-heavy" style="z-index: 3010;">
+            <div class="lobby-content" style="max-width: 400px; padding: 30px;">
+                <h3 id="prompt-title" style="color: var(--accent-primary); margin-bottom: 15px;">Input</h3>
+                <p id="prompt-message" style="margin-bottom: 15px; line-height: 1.6;"></p>
+                <div class="input-group" style="margin-bottom: 25px;">
+                    <input type="text" id="prompt-input" style="width: 100%;" placeholder="Enter text">
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button id="prompt-cancel-btn" class="btn-secondary" style="flex: 1;" data-i18n="back_btn">Cancel</button>
+                    <button id="prompt-ok-btn" class="btn-primary" style="flex: 1;">OK</button>
                 </div>
             </div>
         </div>
