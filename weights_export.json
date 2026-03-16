@@ -1,1 +1,72 @@
-{}
+{
+    "11": {
+        "lines": 0.997,
+        "holes": 1.034,
+        "bumpiness": 0.196,
+        "height": 0.25,
+        "rowTrans": 0.582,
+        "colTrans": 0.836,
+        "wellSums": 0.386,
+        "landingHeight": 0.485,
+        "attack": 3.554,
+        "oppDanger": 0.369,
+        "myDefense": 1.148,
+        "suddenDeath": 0.274
+    },
+    "12": {
+        "lines": 1.142,
+        "holes": 1.257,
+        "bumpiness": 0.109,
+        "height": 0.09,
+        "rowTrans": 0.726,
+        "colTrans": 1.163,
+        "wellSums": 0.416,
+        "landingHeight": 0.612,
+        "attack": 3.738,
+        "oppDanger": 0.421,
+        "myDefense": 1.268,
+        "suddenDeath": 0.196
+    },
+    "13": {
+        "lines": 0.946,
+        "holes": 1.319,
+        "bumpiness": 0.064,
+        "height": 0.015,
+        "rowTrans": 0.767,
+        "colTrans": 1.402,
+        "wellSums": 0.323,
+        "landingHeight": 0.602,
+        "attack": 3.744,
+        "oppDanger": 0.35,
+        "myDefense": 1.282,
+        "suddenDeath": 0.114
+    },
+    "14": {
+        "lines": 0.284,
+        "holes": 1.381,
+        "bumpiness": 0.269,
+        "height": 0.013,
+        "rowTrans": 0.839,
+        "colTrans": 2.232,
+        "wellSums": 0.284,
+        "landingHeight": 0.648,
+        "attack": 3.828,
+        "oppDanger": 0.542,
+        "myDefense": 1.272,
+        "suddenDeath": 0.104
+    },
+    "15": {
+        "lines": 0.338,
+        "holes": 1.673,
+        "bumpiness": 0.369,
+        "height": 0.016,
+        "rowTrans": 0.88,
+        "colTrans": 3.597,
+        "wellSums": 0.362,
+        "landingHeight": 0.998,
+        "attack": 4.752,
+        "oppDanger": 0.971,
+        "myDefense": 1.721,
+        "suddenDeath": 0.108
+    }
+}

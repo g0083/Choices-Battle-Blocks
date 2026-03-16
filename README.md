@@ -1,4 +1,4 @@
-# Choices Battle Tetris ⚔️🧩
+# Choices Battle Blocks ⚔️🧩
 
 [日本語](#日本語) | [English](#english)
 
@@ -7,14 +7,14 @@
 ## 日本語
 
 ### 🌟 ゲームの概要
-「Choices Battle Tetris」は、自分と相手のブロックを互いに選び合う、新感覚の対戦型パズルゲームです。落ちてくるブロックを処理する技術だけでなく、「相手にどの厄介なブロックを送るか」という駆け引きが勝利の鍵を握ります！
+「Choices Battle Blocks」は、自分と相手のブロックを互いに選び合う、新感覚の対戦型パズルゲームです。落ちてくるブロックを処理する技術だけでなく、「相手にどの厄介なブロックを送るか」という駆け引きが勝利の鍵を握ります！
 
 ### 🚀 主な機能
 - **ブロック選択システム**: 4つの選択肢から自分と相手のブロックを戦略的に指名。
 - **P2Pオンライン対戦**: PeerJSを利用したリアルタイムの通信対戦。
 - **高度なAIモード**:
   - Lv1〜10: 高度なアルゴリズムによるヒューリスティックAI。
-  - Lv11〜: JAX/Flaxで訓練されたニューラルネットワークモデル搭載（ONNX Runtime Web）。
+  - Lv11〜: **1手先読み(1-step lookahead)** とCEMで最適化された評価関数を搭載した強化AI。次のブロックを考慮した戦略的な配置を行います。
 - **PWA・オフライン対応**: インストールしてオフラインLAN（テザリング）での対戦が可能。
 - **リプレイ録画**: 試合の録画と再生機能。
 
@@ -29,14 +29,14 @@
 ## English
 
 ### 🌟 Overview
-"Choices Battle Tetris" is a new type of competitive puzzle game where you and your opponent choose blocks for each other. Victory depends not just on clearing lines, but on tactical thinking: "Which difficult block should I give my opponent?"
+"Choices Battle Blocks" is a new type of competitive puzzle game where you and your opponent choose blocks for each other. Victory depends not just on clearing lines, but on tactical thinking: "Which difficult block should I give my opponent?"
 
 ### 🚀 Key Features
 - **Block Selection System**: Strategically choose your next block and your opponent's from 4 options.
 - **P2P Online Multiplayer**: Real-time matches powered by PeerJS.
 - **Advanced AI Mode**:
   - Levels 1-10: High-level heuristic AI.
-  - Levels 11+: Neural Network models trained with JAX/Flax (via ONNX Runtime Web).
+  - Levels 11+: Enhanced AI featuring **1-step lookahead** and CEM-optimized heuristics. It strategically evaluates placements by considering the next falling block.
 - **PWA & Offline Support**: Installable as a PWA for offline LAN matches via hotspot.
 - **Replay System**: Record and watch your matches.
 
@@ -47,6 +47,7 @@
 - **Space**: Hard Drop
 
 ---
+
 
 ## 🛠 Tech Stack
 - **Frontend**: HTML5, Vanilla CSS, JavaScript (Vite)
