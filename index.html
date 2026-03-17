@@ -14,8 +14,8 @@
     <link rel="icon" type="image/png" href="/icon-192.png">
     <meta name="google" content="notranslate">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-  <script type="module" crossorigin src="/assets/index-BW01aUtX.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-DAPNcS-k.css">
+  <script type="module" crossorigin src="/assets/index-B8dCUu3D.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-D5bfLNDy.css">
 </head>
 
 <body>
@@ -23,6 +23,7 @@
         <h2>📱<br>Please Rotate Device</h2>
         <p>このゲームは横画面でのプレイを推奨しています。<br>端末を横向きにしてください。</p>
     </div>
+    <button id="cancel-countdown-btn" class="hidden" style="position: fixed; bottom: 15vh; left: 50%; transform: translateX(-50%); z-index: 10000; background-color: var(--accent-danger); color: white; padding: 12px 30px; border-radius: 30px; border: none; font-weight: bold; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 15px rgba(255,59,59,0.5); white-space: nowrap;" data-i18n="cancel_match">試合をキャンセルする</button>
     <div id="app">
         <header>
             <h1>
@@ -96,8 +97,10 @@
                     </div>
                     <div class="input-group">
                         <label data-i18n="player_name_label">Your Name</label>
-                        <input type="text" id="player-name" placeholder="Enter your name"
-                            data-i18n-placeholder="player_name_placeholder">
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <div id="home-player-level" class="home-level-badge">Lv.10</div>
+                            <input type="text" id="player-name" placeholder="Enter your name" maxlength="15" data-i18n-placeholder="player_name_placeholder" style="margin-bottom: 0;">
+                        </div>
                     </div>
 
                     <div id="mode-selection-area">
@@ -320,8 +323,15 @@
             </div>
 
             <div id="game-view" class="hidden">
+                <!-- ▼ 追加: カウントダウンオーバーレイ -->
+                <div id="countdown-overlay" class="hidden" style="position: absolute; top:0; left:0; width:100%; height:100%; display:flex; justify-content:center; align-items:center; z-index:3000; pointer-events:none;">
+                    <div id="countdown-text" style="font-size: min(15vw, 8rem); font-weight: 900; font-family: 'Outfit', sans-serif; color: white; text-shadow: 0 0 20px rgba(255,255,255,0.8);"></div>
+                </div>
                 <div class="game-container">
                     <div class="player-area p1 glass">
+                        <div id="phase-display" class="phase-display hidden">
+                            PHASE<br><span id="phase-number" style="font-size: 1.5em;">1</span>
+                        </div>
                         <div class="player-info">
                             <span class="player-name" id="p1-display-name">Player 1</span>
                             <div class="score"><span data-i18n="score">Score</span>: <span id="p1-score">0</span></div>
@@ -395,81 +405,82 @@
             </div>
 
             <div id="game-over-overlay" class="overlay hidden glass-heavy">
-                <div class="lobby-content result-screen">
-                    <h2 id="result-text" data-i18n="result">RESULT</h2>
-                    <div id="result-winner" class="result-outcome-text text-glow">-</div>
-
-                    <div class="result-stats">
-                        <div class="stats-grid">
-                            <div class="stat-item p1">
-                                <span id="res-p1-state" class="state-label"></span>
-                                <span id="res-p1-name" class="name" data-i18n="you">You</span>
-                                <div class="val-box">
-                                    <span class="label" data-i18n="score">Score</span>
-                                    <span id="res-p1-score" class="value">0</span>
-                                </div>
-                                <div class="val-box">
-                                    <span class="label" data-i18n="blocks">Blocks</span>
-                                    <span id="res-p1-blocks" class="value">0</span>
-                                </div>
+                <div class="result-content" style="max-width: 500px;">
+            <div id="result-page-1" class="result-page">
+                <h2 id="result-winner" class="glow-text" style="font-size: 3.5rem; margin-bottom: 10px; line-height: 1.1; text-align: center;">YOU WIN!</h2>
+                
+                <div class="result-layout-grid">
+                    
+                    <div class="result-left-pane">
+                        <div class="result-stats" style="margin-bottom: 0;">
+                            <div class="stat-row title-row">
+                                <span></span>
+                                <span id="res-p1-name" class="stat-name">P1</span>
+                                <span id="res-p2-name" class="stat-name">P2</span>
                             </div>
-                            <div class="vs-small">VS</div>
-                            <div class="stat-item p2">
-                                <span id="res-p2-state" class="state-label"></span>
-                                <span id="res-p2-name" class="name" data-i18n="waiting">Opponent</span>
-                                <div class="val-box">
-                                    <span class="label" data-i18n="score">Score</span>
-                                    <span id="res-p2-score" class="value">0</span>
-                                </div>
-                                <div class="val-box">
-                                    <span class="label" data-i18n="blocks">Blocks</span>
-                                    <span id="res-p2-blocks" class="value">0</span>
-                                </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Result</span>
+                                <span id="res-p1-state" class="state-label">WINNER</span>
+                                <span id="res-p2-state" class="state-label loser">LOSER</span>
                             </div>
-                        </div>
-                        <div class="stat-footer">
-                            <span class="stat-label" data-i18n="play_time">Play Time</span>
-                            <span id="result-time" class="stat-value">00:00</span>
+                            <div class="stat-row">
+                                <span class="stat-label">Score</span>
+                                <span id="res-p1-score" class="stat-value">0</span>
+                                <span id="res-p2-score" class="stat-value">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Blocks</span>
+                                <span id="res-p1-blocks" class="stat-value">0</span>
+                                <span id="res-p2-blocks" class="stat-value">0</span>
+                            </div>
+                            <div class="stat-row time-row" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color);">
+                                <span class="stat-label">Time</span>
+                                <span id="result-time" class="stat-value" style="width: 70%; text-align: center;">00:00</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="social-share-area">
-                        <p class="share-label" data-i18n="share_result">SHARE YOUR RESULT</p>
-                        <div class="share-btns">
-                            <button id="share-copy" class="btn-secondary" title="Copy to Clipboard">📋 Copy</button>
-                            <button id="share-twitter" class="btn-sns twitter" title="Share on X">𝕏 (X)</button>
-                            <button id="share-line" class="btn-sns line" title="Share on LINE">LINE</button>
+                    <div class="result-right-pane">
+                        <div id="result-rate-container" class="rate-bar-wrapper hidden">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 8px;">
+                                <div id="res-rate-level" style="font-size: 1.8rem; font-weight: 900; color: var(--accent-primary); line-height: 1;">Lv.0</div>
+                                <div id="res-rate-numbers" style="font-size: 1.1rem; font-weight: 800; color: var(--text-secondary);">
+                                    <span id="res-rate-current" style="color: var(--text-primary);">0</span> / <span id="res-rate-next">100</span>
+                                </div>
+                            </div>
+                            <div style="width: 100%; height: 12px; background: rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; position: relative;">
+                                <div id="res-rate-bar" style="height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); transition: width 0.1s linear;"></div>
+                            </div>
+                            <div id="res-rate-change-text" style="text-align: right; font-weight: 900; margin-top: 5px; font-size: 1.1rem;"></div>
+                            <div id="res-jump-rank-hint" style="color: var(--accent-secondary); font-size: 0.95rem; font-weight: bold; margin-top: 5px; text-align: center; height: 1.2rem;"></div>
                         </div>
+
+                        <div class="share-buttons">
+                            <button id="share-copy" class="share-btn btn-copy" title="Copy Text" data-i18n-title="copy_results_title">📋 COPY</button>
+                            <button id="share-twitter" class="share-btn btn-twitter" title="Share to X" data-i18n-title="share_x_title">𝕏 Post</button>
+                            <button id="share-line" class="share-btn btn-line" title="Share to LINE" data-i18n-title="share_line_title">LINE</button>
+                        </div>
+                        
+                        <button id="result-next-btn" class="btn-primary" style="padding: 15px; font-size: 1.2rem; width: 100%;">NEXT ➡</button>
                     </div>
 
-                    <div class="final-actions">
-                        <p id="restart-status"></p>
-                        <button id="download-replay-btn" class="btn-secondary" style="margin-bottom: 10px; width: 100%;"
-                            data-i18n="save_replay">💾 SAVE REPLAY</button>
-                        <button id="watch-replay-btn" class="btn-primary" style="margin-bottom: 10px; width: 100%;"
-                            data-i18n="watch_replay">▶
-                            WATCH REPLAY</button>
+                </div>
+            </div>
 
-                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                            <button id="new-game-btn" class="btn-primary" style="flex: 1;" data-i18n="play_again">PLAY
-                                AGAIN</button>
-                            <button id="new-match-btn" class="btn-accent hidden" style="flex: 1;"
-                                data-i18n="new_match">NEW MATCH</button>
+                    <div id="result-page-2" class="result-page hidden">
+                        <button id="download-replay-btn" class="btn-secondary" data-i18n="save_replay">💾 Save Replay</button>
+                        <button id="watch-replay-btn" class="btn-secondary" data-i18n="watch_replay">▶ Watch Replay</button>
+                        
+                        <div style="height: 15px;"></div> <button id="new-game-btn" class="btn-primary" data-i18n="play_again">PLAY AGAIN</button>
+                        <button id="new-match-btn" class="btn-primary hidden">NEW MATCH</button>
+                        <div id="cpu-restart-actions" class="hidden" style="display: flex; gap: 10px; width: 100%;">
+                            <button id="btn-prev-level" class="btn-secondary" style="flex: 1;">&lt; Lv Down</button>
+                            <button id="btn-same-level" class="btn-primary" style="flex: 1.5;">Retry</button>
+                            <button id="btn-next-level" class="btn-secondary" style="flex: 1;">Lv Up &gt;</button>
                         </div>
-
-                        <button id="spec-continue-btn" class="btn-primary hidden"
-                            data-i18n="continue_spectating">CONTINUE SPECTATING</button>
-
-                        <div id="cpu-restart-actions" class="hidden"
-                            style="display:flex; gap:10px; justify-content:center;">
-                            <button id="btn-prev-level" class="btn-secondary" style="flex:1;">◀ Lv Down</button>
-                            <button id="btn-same-level" class="btn-primary" style="flex:1.5;"
-                                data-i18n="play_again">Retry</button>
-                            <button id="btn-next-level" class="btn-secondary" style="flex:1;">Lv Up ▶</button>
-                        </div>
-
-                        <button id="home-btn" class="btn-secondary" style="margin-top: 15px; width: 100%;"
-                            data-i18n="home">HOME</button>
+                        <button id="spec-continue-btn" class="btn-primary hidden" data-i18n="continue">Continue</button>
+                        <button id="home-btn" class="btn-secondary" data-i18n="home">HOME</button>
+                        <p id="restart-status" class="status-text"></p>
                     </div>
                 </div>
             </div>
