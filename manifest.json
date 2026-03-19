@@ -1,6 +1,6 @@
 {
-  "name": "Choices Battle Tetris",
-  "short_name": "VS Tetris",
+  "name": "Choices Battle Blocks",
+  "short_name": "Choices Blocks",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#050505",

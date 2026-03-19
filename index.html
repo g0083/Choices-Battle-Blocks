@@ -14,8 +14,9 @@
     <link rel="icon" type="image/png" href="/icon-192.png">
     <meta name="google" content="notranslate">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-  <script type="module" crossorigin src="/assets/index-DMQImk7F.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-BiGlOLOi.css">
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <script type="module" crossorigin src="/assets/index-CTMU0F2A.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-D_OkWar4.css">
 </head>
 
 <body>
@@ -23,7 +24,7 @@
         <h2>📱<br>Please Rotate Device</h2>
         <p>このゲームは横画面でのプレイを推奨しています。<br>端末を横向きにしてください。</p>
     </div>
-    <button id="cancel-countdown-btn" class="hidden" style="position: fixed; bottom: 15vh; left: 50%; transform: translateX(-50%); z-index: 10000; background-color: var(--accent-danger); color: white; padding: 12px 30px; border-radius: 30px; border: none; font-weight: bold; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 15px rgba(255,59,59,0.5); white-space: nowrap;" data-i18n="cancel_match">試合をキャンセルする</button>
+    <button id="cancel-countdown-btn" class="hidden" data-i18n="cancel_match">試合をキャンセルする</button>
     <div id="app">
         <header>
             <h1>
@@ -40,7 +41,8 @@
                     <button id="hamburger-btn" class="btn-secondary"
                         style="border-radius: 50%; width: 36px; height: 36px; min-width: 36px; min-height: 36px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">☰</button>
 
-                    <div id="quick-spectator-indicator" class="hidden" style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 0.85rem; color: var(--accent-secondary); font-weight: 800; text-shadow: 0 0 8px rgba(62, 141, 255, 0.8); pointer-events: none; white-space: nowrap; z-index: 999; animation: smoothFadeUp 0.3s forwards;">
+                    <div id="quick-spectator-indicator" class="hidden"
+                        style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 0.85rem; color: var(--accent-secondary); font-weight: 800; text-shadow: 0 0 8px rgba(62, 141, 255, 0.8); pointer-events: none; white-space: nowrap; z-index: 999; animation: smoothFadeUp 0.3s forwards;">
                         👁 <span id="quick-spectator-count">1</span>
                     </div>
                     <div id="header-menu-dropdown" class="glass hidden">
@@ -99,7 +101,8 @@
                         <label data-i18n="player_name_label">Your Name</label>
                         <div style="display: flex; gap: 10px; align-items: center;">
                             <div id="home-player-level" class="home-level-badge">Lv.10</div>
-                            <input type="text" id="player-name" placeholder="Enter your name" maxlength="15" data-i18n-placeholder="player_name_placeholder" style="margin-bottom: 0;">
+                            <input type="text" id="player-name" placeholder="Enter your name" maxlength="15"
+                                data-i18n-placeholder="player_name_placeholder" style="margin-bottom: 0;">
                         </div>
                     </div>
 
@@ -152,16 +155,22 @@
                             </div>
 
                             <div id="join-area" class="join-section glass" style="padding: 20px;">
-                                <h3 data-i18n="join_game_title">Join a Game or Spectate</h3>
-                                <input type="text" id="target-peer-id" placeholder="Enter Host ID"
-                                    data-i18n-placeholder="enter_host_id_placeholder">
+                                <h3 style="color: var(--accent-secondary); margin-bottom: 15px;" data-i18n="join_game_title">Join / Spectate</h3>
+                                <div style="display: flex; gap: 10px; margin-bottom: 15px; align-items: center;">
+                                    <input type="text" id="enter-host-id" class="input-primary" style="flex: 1; margin-bottom: 0; box-sizing: border-box;" data-i18n-placeholder="enter_host_id_placeholder" placeholder="Enter Host ID">
+                                    <button id="scan-qr-btn" class="btn-scan" title="Scan QR Code">
+                                        <span class="scan-icon-wrapper">
+                                            <span class="scan-label">SCAN</span>
+                                        </span>
+                                    </button>
+                                </div>
                                 <div id="connect-progress-container" class="hidden"
                                     style="width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-top: -5px; margin-bottom: 5px;">
                                     <div id="connect-progress-bar"
                                         style="width: 0%; height: 100%; background: var(--accent-secondary); transition: width 0.2s;">
                                     </div>
                                 </div>
-                                <button id="join-btn" class="btn-primary" data-i18n="connect_btn">Connect</button>
+                                <button id="join-btn" class="btn-primary" style="width: 100%; margin-bottom: 10px;" data-i18n="join_btn">Join as Player</button>
                             </div>
 
                             <button id="back-from-vs-btn" class="btn-secondary" style="width: 100%;"
@@ -194,7 +203,7 @@
                         </div>
 
                         <div id="dual-cpu-section" class="hidden">
-                             <p
+                            <p
                                 style="font-size:0.85rem; opacity:0.9; margin-bottom:20px; text-align: center; line-height: 1.5;">
                                 <span data-i18n="cpu_level_description">Lv10まではヒューリスティックによる基本ロジックです。</span><br>
                                 <span style="color: var(--accent-secondary); font-weight: bold;"
@@ -324,8 +333,11 @@
 
             <div id="game-view" class="hidden">
                 <!-- ▼ 追加: カウントダウンオーバーレイ -->
-                <div id="countdown-overlay" class="hidden" style="position: absolute; top:0; left:0; width:100%; height:100%; display:flex; justify-content:center; align-items:center; z-index:3000; pointer-events:none;">
-                    <div id="countdown-text" style="font-size: min(15vw, 8rem); font-weight: 900; font-family: 'Outfit', sans-serif; color: white; text-shadow: 0 0 20px rgba(255,255,255,0.8);"></div>
+                <div id="countdown-overlay" class="hidden"
+                    style="position: absolute; top:0; left:0; width:100%; height:100%; display:flex; justify-content:center; align-items:center; z-index:3000; pointer-events:none;">
+                    <div id="countdown-text"
+                        style="font-size: min(15vw, 8rem); font-weight: 900; font-family: 'Outfit', sans-serif; color: white; text-shadow: 0 0 20px rgba(255,255,255,0.8);">
+                    </div>
                 </div>
                 <div class="game-container">
                     <div class="player-area p1 glass">
@@ -406,72 +418,95 @@
 
             <div id="game-over-overlay" class="overlay hidden glass-heavy">
                 <div class="result-content" style="max-width: 500px;">
-            <div id="result-page-1" class="result-page">
-                <h2 id="result-winner" class="glow-text" style="font-size: 3.5rem; margin-bottom: 10px; line-height: 1.1; text-align: center;">YOU WIN!</h2>
-                
-                <div class="result-layout-grid">
-                    
-                    <div class="result-left-pane">
-                        <div class="result-stats" style="margin-bottom: 0;">
-                            <div class="stat-row title-row">
-                                <span></span>
-                                <span id="res-p1-name" class="stat-name">P1</span>
-                                <span id="res-p2-name" class="stat-name">P2</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">Result</span>
-                                <span id="res-p1-state" class="state-label">WINNER</span>
-                                <span id="res-p2-state" class="state-label loser">LOSER</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">Score</span>
-                                <span id="res-p1-score" class="stat-value">0</span>
-                                <span id="res-p2-score" class="stat-value">0</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">Blocks</span>
-                                <span id="res-p1-blocks" class="stat-value">0</span>
-                                <span id="res-p2-blocks" class="stat-value">0</span>
-                            </div>
-                            <div class="stat-row time-row" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color);">
-                                <span class="stat-label">Time</span>
-                                <span id="result-time" class="stat-value" style="width: 70%; text-align: center;">00:00</span>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="result-page-1" class="result-page">
+                        <h2 id="result-winner" class="glow-text"
+                            style="font-size: 3.5rem; margin-bottom: 10px; line-height: 1.1; text-align: center;">YOU
+                            WIN!</h2>
 
-                    <div class="result-right-pane">
-                        <div id="result-rate-container" class="rate-bar-wrapper hidden">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 8px;">
-                                <div id="res-rate-level" style="font-size: 1.8rem; font-weight: 900; color: var(--accent-primary); line-height: 1;">Lv.0</div>
-                                <div id="res-rate-numbers" style="font-size: 1.1rem; font-weight: 800; color: var(--text-secondary);">
-                                    <span id="res-rate-current" style="color: var(--text-primary);">0</span> / <span id="res-rate-next">100</span>
+                        <div class="result-layout-grid">
+
+                            <div class="result-left-pane">
+                                <div class="result-stats" style="margin-bottom: 0;">
+                                    <div class="stat-row title-row">
+                                        <span></span>
+                                        <span id="res-p1-name" class="stat-name">P1</span>
+                                        <span id="res-p2-name" class="stat-name">P2</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">Result</span>
+                                        <span id="res-p1-state" class="state-label">WINNER</span>
+                                        <span id="res-p2-state" class="state-label loser">LOSER</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">Score</span>
+                                        <span id="res-p1-score" class="stat-value">0</span>
+                                        <span id="res-p2-score" class="stat-value">0</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">Blocks</span>
+                                        <span id="res-p1-blocks" class="stat-value">0</span>
+                                        <span id="res-p2-blocks" class="stat-value">0</span>
+                                    </div>
+                                    <div class="stat-row time-row"
+                                        style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color);">
+                                        <span class="stat-label">Time</span>
+                                        <span id="result-time" class="stat-value"
+                                            style="width: 70%; text-align: center;">00:00</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div style="width: 100%; height: 12px; background: rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; position: relative;">
-                                <div id="res-rate-bar" style="height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); transition: width 0.1s linear;"></div>
-                            </div>
-                            <div id="res-rate-change-text" style="text-align: right; font-weight: 900; margin-top: 5px; font-size: 1.1rem;"></div>
-                            <div id="res-jump-rank-hint" style="color: var(--accent-secondary); font-size: 0.95rem; font-weight: bold; margin-top: 5px; text-align: center; height: 1.2rem;"></div>
-                        </div>
 
-                        <div class="share-buttons">
-                            <button id="share-copy" class="share-btn btn-copy" title="Copy Text" data-i18n-title="copy_results_title">📋 COPY</button>
-                            <button id="share-twitter" class="share-btn btn-twitter" title="Share to X" data-i18n-title="share_x_title">𝕏 Post</button>
-                            <button id="share-line" class="share-btn btn-line" title="Share to LINE" data-i18n-title="share_line_title">LINE</button>
+                            <div class="result-right-pane">
+                                <div id="result-rate-container" class="rate-bar-wrapper hidden">
+                                    <div
+                                        style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 8px;">
+                                        <div id="res-rate-level"
+                                            style="font-size: 1.8rem; font-weight: 900; color: var(--accent-primary); line-height: 1;">
+                                            Lv.0</div>
+                                        <div id="res-rate-numbers"
+                                            style="font-size: 1.1rem; font-weight: 800; color: var(--text-secondary);">
+                                            <span id="res-rate-current" style="color: var(--text-primary);">0</span> /
+                                            <span id="res-rate-next">100</span>
+                                        </div>
+                                    </div>
+                                    <div
+                                        style="width: 100%; height: 12px; background: rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; position: relative;">
+                                        <div id="res-rate-bar"
+                                            style="height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); transition: width 0.1s linear;">
+                                        </div>
+                                    </div>
+                                    <div id="res-rate-change-text"
+                                        style="text-align: right; font-weight: 900; margin-top: 5px; font-size: 1.1rem;">
+                                    </div>
+                                    <div id="res-jump-rank-hint"
+                                        style="color: var(--accent-secondary); font-size: 0.95rem; font-weight: bold; margin-top: 5px; text-align: center; height: 1.2rem;">
+                                    </div>
+                                </div>
+
+                                <div class="share-buttons">
+                                    <button id="share-copy" class="share-btn btn-copy" title="Copy Text"
+                                        data-i18n-title="copy_results_title">📋 COPY</button>
+                                    <button id="share-twitter" class="share-btn btn-twitter" title="Share to X"
+                                        data-i18n-title="share_x_title">𝕏 Post</button>
+                                    <button id="share-line" class="share-btn btn-line" title="Share to LINE"
+                                        data-i18n-title="share_line_title">LINE</button>
+                                </div>
+
+                                <button id="result-next-btn" class="btn-primary"
+                                    style="padding: 15px; font-size: 1.2rem; width: 100%;">NEXT ➡</button>
+                            </div>
+
                         </div>
-                        
-                        <button id="result-next-btn" class="btn-primary" style="padding: 15px; font-size: 1.2rem; width: 100%;">NEXT ➡</button>
                     </div>
 
-                </div>
-            </div>
-
                     <div id="result-page-2" class="result-page hidden">
-                        <button id="download-replay-btn" class="btn-secondary" data-i18n="save_replay">💾 Save Replay</button>
-                        <button id="watch-replay-btn" class="btn-secondary" data-i18n="watch_replay">▶ Watch Replay</button>
-                        
-                        <div style="height: 15px;"></div> <button id="new-game-btn" class="btn-primary" data-i18n="play_again">PLAY AGAIN</button>
+                        <button id="download-replay-btn" class="btn-secondary" data-i18n="save_replay">💾 Save
+                            Replay</button>
+                        <button id="watch-replay-btn" class="btn-secondary" data-i18n="watch_replay">▶ Watch
+                            Replay</button>
+
+                        <div style="height: 15px;"></div> <button id="new-game-btn" class="btn-primary"
+                            data-i18n="play_again">PLAY AGAIN</button>
                         <button id="new-match-btn" class="btn-primary hidden">NEW MATCH</button>
                         <div id="cpu-restart-actions" class="hidden" style="display: flex; gap: 10px; width: 100%;">
                             <button id="btn-prev-level" class="btn-secondary" style="flex: 1;">&lt; Lv Down</button>
@@ -487,117 +522,140 @@
             <div id="help-overlay" class="overlay hidden glass-heavy" style="z-index: 2500;">
                 <div class="lobby-content"
                     style="max-width: 600px; padding: 30px; text-align: left; max-height: 80vh; overflow-y: auto;">
-                <div class="help-scroll-container">
-                    <h2 style="text-align: center; margin-bottom: 20px; color: var(--accent-secondary);" data-i18n="help_title">How to Play</h2>
+                    <div class="help-scroll-container">
+                        <h2 style="text-align: center; margin-bottom: 20px; color: var(--accent-secondary);"
+                            data-i18n="help_title">How to Play</h2>
 
-                    <div id="help-stage-1" class="help-stage">
-                        <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_overview_title">🌟 ゲームの特徴</h3>
-                        <p style="margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8);"
-                            data-i18n="help_overview_desc">
-                            「Choices Battle Blocks」は、自分と相手のブロックを互いに選び合う、新感覚の対戦型パズルゲームです。
-                            落ちてくるブロックを処理する技術だけでなく、「相手にどの厄介なブロックを送るか」という駆け引きが勝利の鍵を握ります！
-                        </p>
+                        <div id="help-stage-1" class="help-stage">
+                            <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_overview_title">🌟 ゲームの特徴
+                            </h3>
+                            <p style="margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8);"
+                                data-i18n="help_overview_desc">
+                                「Choices Battle Blocks」は、自分と相手のブロックを互いに選び合う、新感覚の対戦型パズルゲームです。
+                                落ちてくるブロックを処理する技術だけでなく、「相手にどの厄介なブロックを送るか」という駆け引きが勝利の鍵を握ります！
+                            </p>
 
-                        <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_how_to_play_title">🎮 遊び方</h3>
-                        <ul
-                            style="margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8); padding-left: 20px;">
-                            <li data-i18n="help_step_1">ブロック選択: 制限時間内に、提示された4つの選択肢の中から「自分用のブロック」と「相手用のブロック」をキーボードの1〜4で選びます。</li>
-                            <li data-i18n="help_step_2">パズルフェーズ: 選んだブロックが順番に落ちてきます。横一列に揃えてブロックを消し、スコアを稼ぎましょう。</li>
-                            <li data-i18n="help_step_3">どちらかのブロックが一番上まで積み上がり、ゲームオーバーになるまで繰り返します。</li>
-                        </ul>
+                            <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_how_to_play_title">🎮 遊び方
+                            </h3>
+                            <ul
+                                style="margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8); padding-left: 20px;">
+                                <li data-i18n="help_step_1">ブロック選択:
+                                    制限時間内に、提示された4つの選択肢の中から「自分用のブロック」と「相手用のブロック」をキーボードの1〜4で選びます。</li>
+                                <li data-i18n="help_step_2">パズルフェーズ: 選んだブロックが順番に落ちてきます。横一列に揃えてブロックを消し、スコアを稼ぎましょう。</li>
+                                <li data-i18n="help_step_3">どちらかのブロックが一番上まで積み上がり、ゲームオーバーになるまで繰り返します。</li>
+                            </ul>
 
-                        <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_controls_title">⌨️ 操作方法</h3>
-                        <div
-                            style="margin-bottom: 30px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px;">
-                            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                <span data-i18n="help_control_move">A / D: 左右移動</span>
-                                <span data-i18n="help_control_drop">S: 下に一段落とす</span>
-                                <span data-i18n="help_control_rotate">Q / E: 左回転 / 右回転</span>
-                                <span data-i18n="help_control_hard_drop">Space: ハードドロップ</span>
-                                <span data-i18n="help_control_select">1〜4キー: ブロックの選択</span>
+                            <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_controls_title">⌨️ 操作方法</h3>
+                            <div
+                                style="margin-bottom: 30px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px;">
+                                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                    <span data-i18n="help_control_move">A / D: 左右移動</span>
+                                    <span data-i18n="help_control_drop">S: 下に一段落とす</span>
+                                    <span data-i18n="help_control_rotate">Q / E: 左回転 / 右回転</span>
+                                    <span data-i18n="help_control_hard_drop">Space: ハードドロップ</span>
+                                    <span data-i18n="help_control_select">1〜4キー: ブロックの選択</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div id="help-stage-2" class="help-stage">
-                        <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_score_title">💎 スコアシステム</h3>
-                        <ul
-                            style="margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8); padding-left: 20px;">
-                            <li data-i18n="help_score_lines">1列:100 / 2列:300 / 3列:500 / 4列:800</li>
-                            <li data-i18n="help_score_drop">手動で落とした距離に応じて、1ブロック最大25点まで加算されます。早く正確に落とすことが高得点への近道です！</li>
-                        </ul>
+                        <div id="help-stage-2" class="help-stage">
+                            <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_score_title">💎 スコアシステム</h3>
+                            <ul
+                                style="margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8); padding-left: 20px;">
+                                <li data-i18n="help_score_lines">1列:100 / 2列:300 / 3列:500 / 4列:800</li>
+                                <li data-i18n="help_score_drop">手動で落とした距離に応じて、1ブロック最大25点まで加算されます。早く正確に落とすことが高得点への近道です！
+                                </li>
+                            </ul>
 
-                        <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_battle_system_title">⚔️ 攻撃と相殺</h3>
-                        <p style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8);" data-i18n="help_battle_desc_1">
-                            設定した段数(n)以上を同時に消すと、指定した段数(m)のお邪魔ブロックを相手に送ることができます。
-                            設定された段数よりも多く同時に消した場合は、1ラインごとにさらに1段追加でお邪魔ブロックを送れます。
-                        </p>
-                        <p style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8);" data-i18n="help_battle_desc_2">
-                            相手から攻撃を受けると「保留」状態になり、自分のブロックが着地した瞬間に下からせり上がってきます。
-                            保留中のお邪魔ブロックがある状態でラインを消して攻撃すると、相手に送る前に自分の保留ブロックを相殺（キャンセル）できます。さらに余裕があれば、すでに自分の盤面にあるお邪魔ブロックも直接消すことができます。
-                        </p>
-                        
-                        <h3 style="color: #ffaa00; margin-bottom: 10px;" data-i18n="help_sudden_death_title">🔥 サドンデス（時間加速）</h3>
-                        <p style="margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8);" data-i18n="help_sudden_death_desc">
-                            試合が永遠に続くのを防ぐため、最初は9ターンごとに相殺不可能な下からのせり上がりが1段発生します。この間隔は30秒経過するごとに1ターンずつ短くなり、最終的には毎ターンせり上がってくる過酷なバトルになります。
-                        </p>
-                    </div>
+                            <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_battle_system_title">⚔️ 攻撃と相殺
+                            </h3>
+                            <p style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8);"
+                                data-i18n="help_battle_desc_1">
+                                設定した段数(n)以上を同時に消すと、指定した段数(m)のお邪魔ブロックを相手に送ることができます。
+                                設定された段数よりも多く同時に消した場合は、1ラインごとにさらに1段追加でお邪魔ブロックを送れます。
+                            </p>
+                            <p style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8);"
+                                data-i18n="help_battle_desc_2">
+                                相手から攻撃を受けると「保留」状態になり、自分のブロックが着地した瞬間に下からせり上がってきます。
+                                保留中のお邪魔ブロックがある状態でラインを消して攻撃すると、相手に送る前に自分の保留ブロックを相殺（キャンセル）できます。さらに余裕があれば、すでに自分の盤面にあるお邪魔ブロックも直接消すことができます。
+                            </p>
 
-                    <div id="help-stage-3" class="help-stage">
-                        <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_rating_title">📈 レーティングシステム</h3>
-                        <p style="margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8);" data-i18n="help_rating_desc">
-                            ランダムマッチやCPU対戦の結果に応じてレートが変動します。レートが1000を超えている場合、168時間（1週間）以上プレイしないと24時間ごとに10ずつレートが自動減少します。これはアクティブなプレイヤーの正確な実力を反映するための仕組みです。
-                        </p>
-
-                        <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_penalty_title">⚠️ 離脱ペナルティ</h3>
-                        <p style="margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8);" data-i18n="help_penalty_desc">
-                            ランダムマッチやCPU対戦の途中で故意にブラウザを閉じたり、通信を切断したりすると、ペナルティとしてレートが減少します。公平な試合環境を維持するため、最後までプレイをお願いします。
-                        </p>
-
-                        <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_other_features_title">🌐 その他の機能</h3>
-                        <ul
-                            style="margin-bottom: 30px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8); padding-left: 20px;">
-                            <li data-i18n="help_spectator">友達の対戦や、CPU同士の神業対戦(Watch Mode)を観戦できます。</li>
-                            <li data-i18n="help_hotspot">アプリをPWAとしてインストールすれば、テザリング機能を使って外でもデータ通信なしで遊べます。</li>
-                        </ul>
-                    </div>
-
-                    <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_creator_title">👤 開発・ライセンス</h3>
-                    <div
-                        style="margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8);">
-                        <p data-i18n="help_creator_name">開発者: O-ya tech</p>
-                        <p><span data-i18n="help_creator_hp_label" style="display:none;">公式HP: </span><a
-                                href="https://g0083.github.io/" target="_blank"
-                                style="color: var(--accent-secondary); text-decoration: none;"
-                                data-i18n="help_creator_hp">公式HP: https://g0083.github.io/</a></p>
-                    </div>
-
-                    <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_license_title">📜 サードパーティ・ライセンス</h3>
-                    <p style="margin-bottom: 30px; font-size: 0.8rem; line-height: 1.6; color: rgba(255,255,255,0.6);"
-                        data-i18n="help_license_libraries">
-                        PeerJS (MIT), QRious (GPL-3.0), nanoid (MIT), Outfit Font (OFL)
-                    </p>
-
-                    <div style="margin-top: 30px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px; font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.4;">
-                        <p><strong>Disclaimer:</strong> This game is an independent fan-made work. It is not affiliated with, authorized, or endorsed by The Tetris Company. All trademarks and registered trademarks are the property of their respective owners.</p>
-                    </div>
-                    <button id="close-help-btn" class="btn-primary" style="width: 100%;"
-                        data-i18n="close">Close</button>
-                </div>
-            </div>
-            <div id="replay-list-overlay" class="overlay hidden glass-heavy" style="z-index: 2500;">
-                <div class="lobby-content" style="max-width: 600px; padding: 30px; max-height: 80vh; display: flex; flex-direction: column;">
-                    <h2 style="color: var(--accent-primary); margin-bottom: 20px; text-align: center;" data-i18n="replay_list_title">Saved Replays</h2>
-                    
-                    <div id="replay-list-container" style="flex: 1; overflow-y: auto; margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;">
+                            <h3 style="color: #ffaa00; margin-bottom: 10px;" data-i18n="help_sudden_death_title">🔥
+                                サドンデス（時間加速）</h3>
+                            <p style="margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8);"
+                                data-i18n="help_sudden_death_desc">
+                                試合が永遠に続くのを防ぐため、最初は9ターンごとに相殺不可能な下からのせり上がりが1段発生します。この間隔は30秒経過するごとに1ターンずつ短くなり、最終的には毎ターンせり上がってくる過酷なバトルになります。
+                            </p>
                         </div>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: auto;">
-                        <button id="load-device-replay-btn" class="btn-accent" data-i18n="load_from_device">📁 Load from Device</button>
-                        <button id="close-replay-list-btn" class="btn-secondary" data-i18n="close">Close</button>
+
+                        <div id="help-stage-3" class="help-stage">
+                            <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_rating_title">📈 レーティングシステム
+                            </h3>
+                            <p style="margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8);"
+                                data-i18n="help_rating_desc">
+                                ランダムマッチやCPU対戦の結果に応じてレートが変動します。レートが1000を超えている場合、168時間（1週間）以上プレイしないと24時間ごとに10ずつレートが自動減少します。これはアクティブなプレイヤーの正確な実力を反映するための仕組みです。
+                            </p>
+
+                            <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_penalty_title">⚠️ 離脱ペナルティ
+                            </h3>
+                            <p style="margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8);"
+                                data-i18n="help_penalty_desc">
+                                ランダムマッチやCPU対戦の途中で故意にブラウザを閉じたり、通信を切断したりすると、ペナルティとしてレートが減少します。公平な試合環境を維持するため、最後までプレイをお願いします。
+                            </p>
+
+                            <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_other_features_title">🌐
+                                その他の機能</h3>
+                            <ul
+                                style="margin-bottom: 30px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8); padding-left: 20px;">
+                                <li data-i18n="help_spectator">友達の対戦や、CPU同士の神業対戦(Watch Mode)を観戦できます。</li>
+                                <li data-i18n="help_hotspot">アプリをPWAとしてインストールすれば、テザリング機能を使って外でもデータ通信なしで遊べます。</li>
+                            </ul>
+                        </div>
+
+                        <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_creator_title">👤 開発・ライセンス</h3>
+                        <div
+                            style="margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8);">
+                            <p data-i18n="help_creator_name">開発者: O-ya tech</p>
+                            <p><span data-i18n="help_creator_hp_label" style="display:none;">公式HP: </span><a
+                                    href="https://g0083.github.io/" target="_blank"
+                                    style="color: var(--accent-secondary); text-decoration: none;"
+                                    data-i18n="help_creator_hp">公式HP: https://g0083.github.io/</a></p>
+                        </div>
+
+                        <h3 style="color: white; margin-bottom: 10px;" data-i18n="help_license_title">📜 サードパーティ・ライセンス
+                        </h3>
+                        <p style="margin-bottom: 30px; font-size: 0.8rem; line-height: 1.6; color: rgba(255,255,255,0.6);"
+                            data-i18n="help_license_libraries">
+                            PeerJS (MIT), QRious (GPL-3.0), nanoid (MIT), Outfit Font (OFL)
+                        </p>
+
+                        <div
+                            style="margin-top: 30px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px; font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.4;">
+                            <p><strong>Disclaimer:</strong> This game is an independent fan-made work. It is not
+                                affiliated with, authorized, or endorsed by The Tetris Company. All trademarks and
+                                registered trademarks are the property of their respective owners.</p>
+                        </div>
+                        <button id="close-help-btn" class="btn-primary" style="width: 100%;"
+                            data-i18n="close">Close</button>
                     </div>
                 </div>
-            </div>
+                <div id="replay-list-overlay" class="overlay hidden glass-heavy" style="z-index: 2500;">
+                    <div class="lobby-content"
+                        style="max-width: 600px; padding: 30px; max-height: 80vh; display: flex; flex-direction: column;">
+                        <h2 style="color: var(--accent-primary); margin-bottom: 20px; text-align: center;"
+                            data-i18n="replay_list_title">Saved Replays</h2>
+
+                        <div id="replay-list-container"
+                            style="flex: 1; overflow-y: auto; margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;">
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: auto;">
+                            <button id="load-device-replay-btn" class="btn-accent" data-i18n="load_from_device">📁 Load
+                                from Device</button>
+                            <button id="close-replay-list-btn" class="btn-secondary" data-i18n="close">Close</button>
+                        </div>
+                    </div>
+                </div>
         </main>
 
         <div id="alert-overlay" class="overlay hidden glass-heavy" style="z-index: 2000;">
@@ -631,7 +689,8 @@
                     <input type="text" id="prompt-input" style="width: 100%;" placeholder="Enter text">
                 </div>
                 <div style="display: flex; gap: 10px;">
-                    <button id="prompt-cancel-btn" class="btn-secondary" style="flex: 1;" data-i18n="back_btn">Cancel</button>
+                    <button id="prompt-cancel-btn" class="btn-secondary" style="flex: 1;"
+                        data-i18n="back_btn">Cancel</button>
                     <button id="prompt-ok-btn" class="btn-primary" style="flex: 1;">OK</button>
                 </div>
             </div>
@@ -717,6 +776,14 @@
             </div>
         </div>
         <div id="toast" class="toast hidden">Message copied!</div>
+
+        <div id="qr-scanner-overlay" class="overlay hidden glass-heavy" style="z-index: 5000;">
+            <div class="lobby-content" style="max-width: 400px; padding: 20px; text-align: center;">
+                <h3 style="color: var(--accent-primary); margin-bottom: 15px;">Scan QR Code</h3>
+                <div id="qr-reader" style="width: 100%; min-height: 250px; background: #000; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 15px;"></div>
+                <button id="close-scanner-btn" class="btn-secondary" style="width: 100%;" data-i18n="close">Close</button>
+            </div>
+        </div>
     </div>
 
 </body>
