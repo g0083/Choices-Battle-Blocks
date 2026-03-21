@@ -15,7 +15,7 @@
     <meta name="google" content="notranslate">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
-  <script type="module" crossorigin src="/assets/index-BVsJj29i.js"></script>
+  <script type="module" crossorigin src="/assets/index-CVh3ySVk.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-CG2f7TvH.css">
 </head>
 
@@ -789,11 +789,44 @@
         <div id="toast" class="toast hidden">Message copied!</div>
 
         <div id="qr-scanner-overlay" class="overlay hidden glass-heavy" style="z-index: 5000;">
-            <div class="lobby-content" style="max-width: 400px; padding: 20px; text-align: center;">
+            <div class="lobby-content" style="max-width: 400px; padding: 20px; text-align: center; position: relative;">
                 <h3 style="color: var(--accent-primary); margin-bottom: 15px;">Scan QR Code</h3>
-                <video id="qr-video" autoplay playsinline style="width: 100%; min-height: 250px; background: #000; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 15px; object-fit: cover;"></video>
+                
+                <div style="position: relative; width: 100%; min-height: 250px; background: #000; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 15px;">
+                    <video id="qr-video" autoplay playsinline style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"></video>
+                    
+                    <!-- ガイド枠 -->
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px; border: 2px solid var(--accent-primary); box-shadow: 0 0 0 2000px rgba(0,0,0,0.5); border-radius: 10px; pointer-events: none;">
+                        <div style="position: absolute; top: 0; left: 0; width: 20px; height: 20px; border-top: 4px solid var(--accent-primary); border-left: 4px solid var(--accent-primary);"></div>
+                        <div style="position: absolute; top: 0; right: 0; width: 20px; height: 20px; border-top: 4px solid var(--accent-primary); border-right: 4px solid var(--accent-primary);"></div>
+                        <div style="position: absolute; bottom: 0; left: 0; width: 20px; height: 20px; border-bottom: 4px solid var(--accent-primary); border-left: 4px solid var(--accent-primary);"></div>
+                        <div style="position: absolute; bottom: 0; right: 0; width: 20px; height: 20px; border-bottom: 4px solid var(--accent-primary); border-right: 4px solid var(--accent-primary);"></div>
+                        <!-- スキャン線アニメーション -->
+                        <div style="position: absolute; width: 100%; height: 2px; background: var(--accent-primary); top: 0; box-shadow: 0 0 10px var(--accent-primary); animation: scanLine 2s linear infinite;"></div>
+                    </div>
+                    
+                    <!-- ライトボタン -->
+                    <button id="qr-torch-btn" class="glass" style="position: absolute; bottom: 15px; right: 15px; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; border: 1px solid rgba(255,255,255,0.2); z-index: 10;">
+                        🔦
+                    </button>
+                    
+                    <!-- ズームコントロール -->
+                    <div id="qr-zoom-container" class="hidden" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); width: 60%; background: rgba(0,0,0,0.6); padding: 8px 15px; border-radius: 20px; display: flex; align-items: center; gap: 10px; z-index: 10;">
+                        <span style="font-size: 0.8rem;">-</span>
+                        <input type="range" id="qr-zoom-slider" min="1" max="5" step="0.1" value="1" style="flex: 1; cursor: pointer;">
+                        <span style="font-size: 0.8rem;">+</span>
+                    </div>
+                </div>
+
                 <button id="close-scanner-btn" class="btn-secondary" style="width: 100%;" data-i18n="close">Close</button>
             </div>
+            
+            <style>
+                @keyframes scanLine {
+                    0% { top: 0; }
+                    100% { top: 100%; }
+                }
+            </style>
         </div>
     </div>
 
